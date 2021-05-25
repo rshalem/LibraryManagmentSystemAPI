@@ -1,3 +1,4 @@
+from authors.serializers import AuthorSerializer
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
@@ -6,7 +7,7 @@ from rest_framework.test import APITestCase
 
 from categories.models import Categories
 
-class AuthorTestCases(APITestCase):
+class AuthorViewTestCases(APITestCase):
     def setUp(self):
         register_url = reverse('users:register')
         user_data = {

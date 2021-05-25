@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/books/', include('books.urls')),
     path('api/categories/', include('categories.urls')),
     path('api/users/', include('users.urls')),
+    path('api/analytics/', include('analytics.urls')),
 ]

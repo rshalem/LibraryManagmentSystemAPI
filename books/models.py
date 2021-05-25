@@ -1,5 +1,4 @@
 from categories.models import Categories
-import categories
 from django.db import models
 import uuid
 

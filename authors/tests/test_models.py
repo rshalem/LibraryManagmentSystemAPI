@@ -5,7 +5,7 @@ from rest_framework.test import force_authenticate
 from rest_framework.test import APITestCase
 
 
-class AuthorTestCases(APITestCase):
+class AuthorModelTestCases(APITestCase):
     def setUp(self):
         register_url = reverse('users:register')
         user_data = {
