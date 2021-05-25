@@ -21,16 +21,16 @@ class UserTokenGenerationTestCases(APITestCase):
 
     def test_token_creation(self):
         self.assertIsNot(self.token.key, '')
-        print('TOKEN GENERATED PASSED')
+        print('TOKEN GENERATED TEST PASSED')
 
     def test_author_list_with_authenticated(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        print('AUTHENTICATED')
+        print('TEST AUTHOR LIST WITH AUTHENTICATION WORKED')
 
     def test_author_list_with_unauthenticated(self):
         self.client.force_authenticate(user=None)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        print('UN AUTHENTICATED PASSED')
+        print('TEST AUTHOR LIST WITH UN AUTHENTICATION WORKED')
     

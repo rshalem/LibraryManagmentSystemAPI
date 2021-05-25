@@ -1,11 +1,30 @@
-import json
-from datetime import date
+from datetime import date, datetime
 from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
+from authors.models import Authors
+from books.models import Books
+from books.serializers import BookSerializer
+from categories.models import Categories
+
 class BooksViewTestCases(APITestCase):
     def setUp(self):
+        # book obj creation
+        self.author1 = Authors.objects.create(author_name='James',author_registered=datetime.today(),bio='Auth')
+        self.author2 = Authors.objects.create(author_name='Ron',author_registered=datetime.today(),bio='Guitarist')
+        self.cat1 = Categories.objects.create(category_name='Love')
+        self.cat2 = Categories.objects.create(category_name='Dark')
+
+        book = Books.objects.create(
+            book_name = "TestsBook",
+            published_date = date.today()
+        )
+        book.authors.add(self.author1.id)
+        book.categories.add(self.cat1.id)
+        book.save()
+
+        # user registration
         register_url = reverse('users:register')
         user_data = {
             'username':'ben',
@@ -13,15 +32,9 @@ class BooksViewTestCases(APITestCase):
             'password1':'testpass1',
             'password2':'testpass1'
         }
-        reversed_url = reverse('create-category')
-        response = self.client.post(reversed_url, data={'category_name':'Thriller'})
-        self.category = json.loads(response.content.decode('utf-8'))
-
         res = self.client.post(register_url, user_data, format='json')
         user = User.objects.get(username='ben')
         self.client.force_authenticate(user=user)
-
-        return super().setUp()
 
     def test_book_create_view(self):
         data = {
@@ -35,3 +48,17 @@ class BooksViewTestCases(APITestCase):
         self.assertEqual(res.status_code, 201)
 
         print('TEST BOOK MODEL CREATED VIA VIEW')
+
+    def test_book_list_view(self):
+        url = reverse('books')
+        books = Books.objects.all()
+        # get from db
+        response = self.client.get(url)
+        serializer = BookSerializer(books, many=True)
+        
+        self.assertEqual(response.status_code, 200)
+        print('TEST GET ALL AUTHORS VIEW WORKED')
+        self.assertEqual(response.data, serializer.data)
+        print('TEST AUTHOR SERIALIZER WORKED')
+        
+        
