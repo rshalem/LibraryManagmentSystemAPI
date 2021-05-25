@@ -45,6 +45,7 @@ GET/READ: api/analytics/books/<str:category_name>/ - gets how many books belongs
 
 ## NOTE:
 * db used is sqlite3 keeping in mind the non scalability of this API
+* Make sure to add Token inside header as **KEY**: Authorization & **VALUE**: Token c776ec417e7ef27c29e20134bf7ec0d2b0425
 * category name used while fetching analytics should be unique in the db
 * please ensure authors & categories m2m field data is inserted in this format, {'authors': ['test1','test2], 'categories': ['thriller','fiction'] }
 * API Testing is done via POSTMAN & Rest Framework's APITestCase Class
