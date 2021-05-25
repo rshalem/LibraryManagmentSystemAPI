@@ -20,5 +20,5 @@ class Books(models.Model):
         return self.book_name
 
     @property
-    def get_categories(self): # analytics api
+    def get_categories(self):
         return self.categories_set.all()

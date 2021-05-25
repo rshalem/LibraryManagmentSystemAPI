@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.urls import reverse
+
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
@@ -17,6 +18,7 @@ class UserTokenGenerationTestCases(APITestCase):
         self.api_authentication()
 
     def api_authentication(self):
+        """ authenticating with Token credentials"""
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
     def test_token_creation(self):

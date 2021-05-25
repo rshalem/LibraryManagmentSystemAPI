@@ -47,5 +47,6 @@ GET/READ: api/analytics/books/<str:category_name>/ - gets how many books belongs
 * db used is sqlite3 keeping in mind the non scalability of this API
 * category name used while fetching analytics should be unique in the db
 * please ensure authors & categories m2m field data is inserted in this format, {'authors': ['test1','test2], 'categories': ['thriller','fiction'] }
-* api working validation are done both via DRF's template view and POSTMAN
+* API Testing is done via POSTMAN & Rest Framework's APITestCase Class
+* Endpoints are all mentioned above.
 ---

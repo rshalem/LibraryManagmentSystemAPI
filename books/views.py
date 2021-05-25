@@ -58,8 +58,8 @@ class CreateBookView(APIView):
                 book.authors.add(author)
             for category in categories_queryset:
                 book.categories.add(category)
-            
             book.save()
+            
             serializer = BookSerializer(book)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except:

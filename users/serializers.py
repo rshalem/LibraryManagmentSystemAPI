@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
-    """custom attrs pass1 and pass2 for validation"""
+    """custom attrs pass1 and pass2 for validation while registering"""
     password1 = serializers.CharField(write_only=True, required=True)
     password2 = serializers.CharField(write_only=True, required=True)
 
@@ -21,6 +21,6 @@ class UserSerializer(serializers.ModelSerializer):
             username = validated_data['username'],
             email=validated_data['email'],
         )
-        user.set_password(validated_data['password2'])
+        user.set_password(validated_data['password2']) #hashed
         user.save()
         return user
